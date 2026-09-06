@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ארבעת המינים - ניהול</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-mode="admin">
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand-wrap">
+          <div>
+            <p class="eyebrow">שוק ארבעת המינים בנהריה</p>
+            <p class="brand-location">בית כנסת משה רבינו · הנשר 1</p>
+          </div>
+        </div>
+        <div class="header-actions">
+          <span class="status-pill">אזור מנהל</span>
+          <button id="resetDataBtn" class="ghost-btn">אפס נתונים</button>
+        </div>
+      </header>
+
+      <main class="dashboard">
+        <span class="floating-etrog etrog-one" role="button" tabindex="0" aria-label="אתרוג זז">🍋</span>
+        <span class="floating-etrog etrog-two" role="button" tabindex="0" aria-label="אתרוג זז">🍋</span>
+        <span class="floating-etrog etrog-three" role="button" tabindex="0" aria-label="אתרוג זז">🍋</span>
+        <section class="panel form-panel">
+          <h2>הוספת הזמנה</h2>
+
+          <form id="orderForm" novalidate>
+            <div class="field-grid">
+              <label>
+                <span>שם לקוח</span>
+                <input id="customerName" name="customerName" type="text" placeholder="לדוגמה: אבי כהן" required />
+              </label>
+
+              <label>
+                <span>טלפון</span>
+                <input id="customerPhone" name="customerPhone" type="tel" placeholder="050-1234567" required />
+              </label>
+
+             <label>
+                <span>סוג סט</span>
+                <select id="productType" name="productType">
+                  <option value="">בחר סט</option>
+                  
+                  <option value="כשר לברכה מרוקאי">כשר לברכה מרוקאי 99₪</option>
+                  <option value="כשר לברכה תימני">כשר לברכה תימני 80₪</option>
+                  
+                  <option value="מהודר א מרוקאי">מהודר א מרוקאי 200₪</option>
+                  <option value="מהודר א תימני">מהודר א תימני  120₪</option>
+                  
+                  
+                  <option value="מהודר א א תימני">מהודר א א תימני 200₪</option>
+                  
+                  
+                </select>
+              </label>
+
+              <label>
+                <span>כמות</span>
+                <input id="quantity" name="quantity" type="number" min="1" value="1" required />
+              </label>
+
+              <label class="checkbox-field">
+                <span>האם צריך משלוח?</span>
+                <input id="needsDelivery" name="needsDelivery" type="checkbox" />
+              </label>
+
+              <label id="deliveryAddressField" class="shipping-address hidden">
+                <span>לשם המשלוח</span>
+                <textarea id="deliveryAddress" name="deliveryAddress" rows="2" placeholder="כתובת מלאה למשלוח"></textarea>
+              </label>
+            </div>
+
+            <div class="actions">
+              <button type="button" id="addOrderBtn" class="ghost-btn">הוסף הזמנה נוספת</button>
+              <button type="button" id="clearCurrentOrderBtn" class="ghost-btn small-btn">נקה בחירה</button>
+              <button type="submit" class="primary-btn">הוסף להזמנות</button>
+              <button type="button" id="loadGoogleSheetBtn" class="ghost-btn small-btn">טען מגוגל שיטס</button>
+              <label class="upload-btn">
+                <input id="csvFileInput" type="file" accept=".csv,text/csv" />
+                <span>ייבא CSV</span>
+              </label>
+            </div>
+            <div id="cartSummary" class="cart-summary hidden" aria-live="polite"></div>
+            <p id="orderStatus" class="order-status" role="status" aria-live="polite"></p>
+          </form>
+        </section>
+
+        <section class="panel summary-panel">
+          <h2>סיכום</h2>
+          <div id="summaryCards" class="summary-cards"></div>
+        </section>
+
+        <section class="panel table-panel">
+          <div class="section-header">
+            <h2>הזמנות</h2>
+            <button id="downloadCsvBtn" class="ghost-btn small-btn">הורד CSV</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>שם</th>
+                  <th>טלפון</th>
+                  <th>סוג</th>
+                  <th>כמות</th>
+                  <th>משלוח</th>
+                  <th>כתובת</th>
+                  <th>הערות</th>
+                  <th>מחיקה</th>
+                </tr>
+              </thead>
+              <tbody id="ordersTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="panel table-panel">
+          <h2>סיכום לפי לקוח</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>שם לקוח</th>
+                  <th>טלפון</th>
+                  <th>מוצרים</th>
+                  <th>כמות כוללת</th>
+                </tr>
+              </thead>
+              <tbody id="customersTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
