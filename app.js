@@ -2,7 +2,7 @@ const STORAGE_KEY = "friend-harbahat-haminim-orders-v1";
 const GOOGLE_SHEET_CSV_URL =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vSKXTurywqKCwdpag0pR4sg3WLISAptW8M6CB0HIhXhjIXyWycbzC7onXOBXwfmUvWOKwIBquSkY9L7/pub?output=csv&gid=0";
 const ORDERS_API_URL = "https://script.google.com/macros/s/AKfycbyh-GnxBn3uOvmBHHoxsoP2FOzYsWWAeE8D1IUYUoZXMh_5EwGDDCAHFHFJlm3-y5ZimA/exec";
-const ADMIN_PASSWORD = "325276319";
+const ADMIN_PASSWORD = "033568221";
 const state = {
   orders: [],
 };
@@ -17,6 +17,15 @@ const defaultProducts = [
   "כשר לברכה",
   "כשר לברכה מרוקאי",
   "כשר לברכה תימני",
+  "מהודר תימני",
+  "מהודר א תימני",
+  "מהודר א א תימני",
+  "מהודר מרוקאי",
+  "מהודר א מרוקאי",
+  "מהודר א א מרוקאי",
+  "הדסי רש\"י",
+  "נרתיק מהודר לולב",
+  "קופסא מהודרת לאתרוג",
 ];
 
 const form = document.getElementById("orderForm");
@@ -44,6 +53,14 @@ const pendingOrders = [];
 let isSubmitting = false;
 
 if (form) form.noValidate = true;
+
+if (pageMode === "admin") {
+  const password = window.prompt("הכנס סיסמה למנהל");
+  if (password !== ADMIN_PASSWORD) {
+    window.location.href = "index.html";
+    throw new Error("Unauthorized");
+  }
+}
 
 function toggleDeliveryFields() {
   if (!needsDeliveryInput) return;
