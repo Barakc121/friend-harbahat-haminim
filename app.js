@@ -56,9 +56,15 @@ if (form) form.noValidate = true;
 
 if (pageMode === "admin") {
   const adminSessionKey = "nahariya-admin-authenticated";
-  if (sessionStorage.getItem(adminSessionKey) !== "true") {
+  const adminPromptKey = "nahariya-admin-prompt-opened";
+  if (
+    sessionStorage.getItem(adminSessionKey) !== "true" &&
+    sessionStorage.getItem(adminPromptKey) !== "true"
+  ) {
+    sessionStorage.setItem(adminPromptKey, "true");
     const password = window.prompt("הכנס סיסמה למנהל");
     if (password !== ADMIN_PASSWORD) {
+      sessionStorage.removeItem(adminPromptKey);
       window.location.href = "index.html";
       throw new Error("Unauthorized");
     }
