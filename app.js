@@ -1,7 +1,7 @@
 const STORAGE_KEY = "friend-harbahat-haminim-orders-v1";
 const GOOGLE_SHEET_CSV_URL =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vSKXTurywqKCwdpag0pR4sg3WLISAptW8M6CB0HIhXhjIXyWycbzC7onXOBXwfmUvWOKwIBquSkY9L7/pub?output=csv&gid=0";
-const ORDERS_API_URL = "https://script.google.com/macros/s/AKfycbzo9ESAKUA16ovfAqd_8WrroOmF2lKr9rLdKc7YXucX5NCriWXj2LFXNPvKtEmdgjwbvg/exec";
+const ORDERS_API_URL = "https://script.google.com/macros/s/AKfycbyh-GnxBn3uOvmBHHoxsoP2FOzYsWWAeE8D1IUYUoZXMh_5EwGDDCAHFHFJlm3-y5ZimA/exec";
 const ADMIN_PASSWORD = "325276319";
 const state = {
   orders: [],
