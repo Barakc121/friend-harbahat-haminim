@@ -55,10 +55,14 @@ let isSubmitting = false;
 if (form) form.noValidate = true;
 
 if (pageMode === "admin") {
-  const password = window.prompt("הכנס סיסמה למנהל");
-  if (password !== ADMIN_PASSWORD) {
-    window.location.href = "index.html";
-    throw new Error("Unauthorized");
+  const adminSessionKey = "nahariya-admin-authenticated";
+  if (sessionStorage.getItem(adminSessionKey) !== "true") {
+    const password = window.prompt("הכנס סיסמה למנהל");
+    if (password !== ADMIN_PASSWORD) {
+      window.location.href = "index.html";
+      throw new Error("Unauthorized");
+    }
+    sessionStorage.setItem(adminSessionKey, "true");
   }
 }
 
