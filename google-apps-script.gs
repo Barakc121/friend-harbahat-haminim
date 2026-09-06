@@ -1,7 +1,8 @@
 const SHEET_NAME = "Orders";
+const SPREADSHEET_ID = "1DwbnIarNjGVSTZBR6ZdfMFeZ1VHTnorIf4pkaR4E4jo";
 
 function getSheet_() {
-  const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
   return spreadsheet.getSheetByName(SHEET_NAME) || spreadsheet.insertSheet(SHEET_NAME);
 }
 
